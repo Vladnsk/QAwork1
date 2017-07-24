@@ -33,13 +33,14 @@ public class Calculator {
             public void actionPerformed(ActionEvent e) {
 
                 String value = textField1.getText();
-                if (checkKeys(textField1.getText()) && checkKeys(TextField2.getText())) {
-                    int result = minus(Integer.parseInt(textField1.getText()), Integer.parseInt(TextField2.getText()));
+                if (checkKeys(textField1.getText()) && checkKeys(TextField2.getText()) && checkZero(Integer.parseInt(TextField2.getText()))) {
+                    int result = del(Integer.parseInt(textField1.getText()), Integer.parseInt(TextField2.getText()));
                     textArea1.setText("" + result);
                 } else {
                     JOptionPane.showMessageDialog(null, "Incorrect input data!");
                     textField1.setText(null);
-                    textArea1.setText("Error");
+                    TextField2.setText(null);
+                    textArea1.setText(null);
                 }
             }
         });
@@ -65,8 +66,15 @@ public class Calculator {
         return keys.matches("([-+])?\\d*\\.?,?\\d+");
     }
 
-    public static int minus(int arg1, int arg2){
-        int res = arg1 - arg2;
+    public static  Boolean checkZero(int number){
+        if(number == 0)
+            return false;
+        else
+            return true;
+    }
+
+    public static int del(int arg1, int arg2){
+        int res = arg1/arg2;
         return res;
     }
 }

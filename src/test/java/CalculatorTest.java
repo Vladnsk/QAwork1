@@ -34,8 +34,13 @@ public class CalculatorTest {
     }
 
     @Test
-    public void minus() throws Exception {
-        assertEquals(9, Calculator.minus(17,8));
+    public void del() throws Exception {
+        assertEquals(10, Calculator.del(20,2));
+    }
+
+    @Test(expected = ArithmeticException.class)
+    public void delWithException() {
+        Calculator.del(15,0);
     }
 
 
