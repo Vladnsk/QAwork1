@@ -1,7 +1,5 @@
 import org.junit.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 /**
@@ -34,14 +32,16 @@ public class CalculatorTest {
     }
 
     @Test
-    public void del() throws Exception {
-        assertEquals(10, Calculator.del(20,2));
+    public void checkDev() throws Exception{
+
+        assertEquals(5, (int)Calculator.dev(10,2));
+        assertEquals(-5, (int)Calculator.dev(-10,2));
+        assertEquals(-5, (int)Calculator.dev(10,-2));
+
+
     }
 
-    @Test(expected = ArithmeticException.class)
-    public void delWithException() {
-        Calculator.del(15,0);
-    }
+
 
 
 }

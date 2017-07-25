@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.geom.Arc2D;
 
 /**
  * Created by Владислав on 25.07.2017.
@@ -14,6 +15,7 @@ public class Calculator {
     private JTextField TextField2;
     private JTextArea textArea1;
     private JButton Button;
+    
 
     public Calculator() {
         JFrame mainWindow = new JFrame("Test app");
@@ -25,18 +27,20 @@ public class Calculator {
         mainWindow.setContentPane(panel1);
         mainWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE); //задаем действие по-умолчанию при попытке заккрытия формы
 
+
          /* Обработчик клика по кнопке */
-
-
-        /* Обработчик закрытия формы */
         Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                String value = textField1.getText();
-                if (checkKeys(textField1.getText()) && checkKeys(TextField2.getText()) && checkZero(Integer.parseInt(TextField2.getText()))) {
-                    int result = del(Integer.parseInt(textField1.getText()), Integer.parseInt(TextField2.getText()));
-                    textArea1.setText("" + result);
-                } else {
+                String text1 = textField1.getText();
+                String text2 = TextField2.getText();
+                double number1 = Double.parseDouble(text1);
+                double number2 = Double.parseDouble(text2);
+
+                if (checkKeys(text1) && checkKeys(text2))
+                    if (checkZero(number2))
+				        textArea1.setText(""+dev(number1,number2));
+                else {
                     JOptionPane.showMessageDialog(null, "Incorrect input data!");
                     textField1.setText(null);
                     TextField2.setText(null);
@@ -44,6 +48,8 @@ public class Calculator {
                 }
             }
         });
+
+        /* Обработчик закрытия формы */
 
         mainWindow.addWindowListener(new WindowAdapter() {
             @Override
@@ -66,15 +72,17 @@ public class Calculator {
         return keys.matches("([-+])?\\d*\\.?,?\\d+");
     }
 
-    public static  Boolean checkZero(int number){
+    /* Проверка на деление на ноль */
+    public static Boolean checkZero(double number){
         if(number == 0)
             return false;
         else
             return true;
     }
+    /* Деление */
+    public static double dev(double firstStr, double secondStr) {
 
-    public static int del(int arg1, int arg2){
-        int res = arg1/arg2;
-        return res;
+        double result = firstStr/secondStr;
+        return result;
     }
 }
