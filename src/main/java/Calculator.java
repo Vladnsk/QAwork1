@@ -34,12 +34,9 @@ public class Calculator {
 
                 String text1 = textField1.getText();
                 String text2 = TextField2.getText();
-                double number1 = Double.parseDouble(text1);
-                double number2 = Double.parseDouble(text2);
 
-                if (checkKeys(text1) && checkKeys(text2))
-                    if (checkZero(number2))
-				        textArea1.setText(""+dev(number1,number2));
+                if (checkDev(text1,text2))
+				        textArea1.setText(devS(text1,text2));
                 else {
                     JOptionPane.showMessageDialog(null, "Incorrect input data!");
                     textField1.setText(null);
@@ -79,10 +76,34 @@ public class Calculator {
         else
             return true;
     }
-    /* Деление */
-    public static double dev(double firstStr, double secondStr) {
 
-        double result = firstStr/secondStr;
+    /* Проверка на возможность деления */
+    public static Boolean checkDev(String str1, String str2){
+        double number2 = Double.parseDouble(str2);
+
+        if (checkKeys(str1) || checkKeys(str2))
+            if (checkZero(number2))
+                return true;
+            else
+                return false;
+        else
+            return false;
+    }
+    /* Деление */
+    public static String devS(String firstStr, String secondStr) {
+        double number1 = Double.parseDouble(firstStr);
+        double number2 = Double.parseDouble(secondStr);
+        double res = 0;
+        String result = ""+res;
+
+        if(checkZero(number2)) {
+            res = number1 / number2;
+            result = ""+res;
+        }
+        else
+        result = null;
+
+
         return result;
     }
 }
