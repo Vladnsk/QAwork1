@@ -59,33 +59,16 @@ public class Calculator {
         });
     }
 
-    /**
-     * Проверка что введено именно число
-     *
-     * @param keys введеная в поле строка
-     * @return результат проверки
-     */
-    public static Boolean checkKeys(String keys) {
-        return keys.matches("([-+])?\\d*\\.?,?\\d+");
-    }
-
-    /* Проверка на деление на ноль */
-    public static Boolean checkZero(double number){
-        if(number == 0)
-            return false;
-        else
-            return true;
-    }
 
     /* Проверка на возможность деления */
     public static Boolean checkDev(String str1, String str2){
-        double number2 = Double.parseDouble(str2);
-
-        if (checkKeys(str1) || checkKeys(str2))
-            if (checkZero(number2))
-                return true;
-            else
+        if (str1.matches("\\-?[0-9]+") == true && str2.matches("\\-?[0-9]+") == true) {
+            double number2 = Double.parseDouble(str2);
+            if (number2 == 0)
                 return false;
+            else
+                return true;
+        }
         else
             return false;
     }
@@ -93,16 +76,9 @@ public class Calculator {
     public static String devS(String firstStr, String secondStr) {
         double number1 = Double.parseDouble(firstStr);
         double number2 = Double.parseDouble(secondStr);
-        double res = 0;
+
+        double res = number1 / number2;
         String result = ""+res;
-
-        if(checkZero(number2)) {
-            res = number1 / number2;
-            result = ""+res;
-        }
-        else
-        result = null;
-
 
         return result;
     }

@@ -12,7 +12,7 @@ public class CalculatorTest {
         ArrayList<String> testMass = new ArrayList<String>();
         testMass.add("123");
         testMass.add("321abs");
-        testMass.add("111");
+        testMass.add("0");
 
         for(int i = 0; i < testMass.size() - 1; i++){
             assertTrue(Calculator.checkDev(testMass.get(i),testMass.get(testMass.size() - 1 - i)));
@@ -32,12 +32,12 @@ public class CalculatorTest {
     }
 
     @Test
-    public void checkDev() throws Exception{
+    public void devS() throws Exception{
 
         assertEquals("5.0", Calculator.devS("10","2"));
         assertEquals("-5.0", Calculator.devS("-10","2"));
         assertEquals("-5.0", Calculator.devS("10","-2"));
-        assertEquals(null, Calculator.devS("10","0"));
+
 
 
     }
