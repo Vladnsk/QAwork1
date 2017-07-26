@@ -31,18 +31,11 @@ public class Calculator {
          /* Обработчик клика по кнопке */
         Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 String text1 = textField1.getText();
                 String text2 = TextField2.getText();
 
-                if (checkDev(text1,text2))
-				        textArea1.setText(devS(text1,text2));
-                else {
-                    JOptionPane.showMessageDialog(null, "Incorrect input data!");
-                    textField1.setText(null);
-                    TextField2.setText(null);
-                    textArea1.setText(null);
-                }
+                textArea1.setText(devS(text1, text2));
+
             }
         });
 
@@ -62,7 +55,7 @@ public class Calculator {
 
     /* Проверка на возможность деления */
     public static Boolean checkDev(String str1, String str2){
-        if (str1.matches("\\-?[0-9]+") == true && str2.matches("\\-?[0-9]+") == true) {
+        if (str1.matches("\\-?\\d+(\\.\\d{0,})?") == true && str2.matches("\\-?\\d+(\\.\\d{0,})?") == true) {
             double number2 = Double.parseDouble(str2);
             if (number2 == 0)
                 return false;
@@ -74,12 +67,18 @@ public class Calculator {
     }
     /* Деление */
     public static String devS(String firstStr, String secondStr) {
-        double number1 = Double.parseDouble(firstStr);
-        double number2 = Double.parseDouble(secondStr);
+        double res = 0;
+        String result;
 
-        double res = number1 / number2;
-        String result = ""+res;
-
+        if(checkDev(firstStr,secondStr) == true) {
+            double number1 = Double.parseDouble(firstStr);
+            double number2 = Double.parseDouble(secondStr);
+            res = number1 / number2;
+            result = "" + res;
+        }
+        else{
+            result = "Incorrect input";
+        }
         return result;
     }
 }
